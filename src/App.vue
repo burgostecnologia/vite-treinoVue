@@ -223,7 +223,18 @@
   </ul>
 
   <TestUnmountedVue> </TestUnmountedVue>
-  
+  <SlotTeste>
+     
+    SLOT COMPONENT - Esse texto entra dentro da tag slot do component criado SlotTTeste
+
+     <template v-slot:description> 
+      SLOT COMPONENT nomeado - Esse texto entra dentro da tag slot do component criado SlotTTeste com name description
+     </template>
+
+  </SlotTeste>
+  <br><br>
+
+  <BaseCard></BaseCard>
 
 </div>
 </template>
@@ -232,7 +243,8 @@
 <script>
 import TestUnmountedVue from './components/TestUnmounted.vue';
 import TheHeader from './components/TheHeader.vue';
-
+import SlotTeste from './components/SlotTeste.vue';
+import BaseCard from './components/BaseCard.vue'
 export default{
   name: 'App',
   beforeCreate(){
@@ -257,6 +269,7 @@ export default{
     console.log("mounted");
     console.log('acesso ao estado do componente', this.name);
     console.log('acesso ao DOM ', this.$el); // o 
+    console.log('acesso aos Slots ', this.$slots); // o 
     //($el é a variavel que traz a raiz do dom[o que esta dentro do template(lembrar de colocar tudo dentro de uma div)])
   },
   beforeUnmount(){
@@ -277,7 +290,6 @@ export default{
   updated(){
     console.log("updated - usar mais para debugar variaveis");
   },
-
   watch: {
     usuario : { 
       handler(){
@@ -307,6 +319,8 @@ export default{
   components:{   
     TheHeader, 
     TestUnmountedVue,
+    SlotTeste,
+    BaseCard,
   },
   methods: {
     changePage () { 
