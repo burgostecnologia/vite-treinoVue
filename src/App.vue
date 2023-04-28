@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div >
     <img class="logoSize" src="./assets/burgostecnologia.png" alt="logo burgos">
     <img class="logoSize" src="./assets/vue.svg" alt="logo vue">
@@ -201,7 +202,7 @@
     <ol>Não tem acesso ao DOM</ol>
     <li style="font-weight: bold;">Montagem</li>
     <ol>inicializar lib externa</ol>
-    <ol>aqui tem acesso ao DOM</ol>
+    <ol>aqui tem acesso ao template (DOM)</ol>
     <li style="font-weight: bold;">Atualização</li>
     <ol>pra debug - pouco usado</ol>
     <li style="font-weight: bold;">Desmontagem</li>
@@ -215,15 +216,68 @@
     <ol>beforeUnmounted</ol>
     <ol>Unmounted</ol>
 
+    <ol>beforeUpdate</ol>
+    <ol>Update</ol>
+
+
   </ul>
 
+  <TestUnmountedVue> </TestUnmountedVue>
+  
 
+</div>
 </template>
 
 
 <script>
+import TestUnmountedVue from './components/TestUnmounted.vue';
 import TheHeader from './components/TheHeader.vue';
+
 export default{
+  name: 'App',
+  beforeCreate(){
+    console.log("beforeCreate");
+    console.log('acesso ao estado do componente', this.name);
+    console.log('acesso ao DOM ', this.$el); // o 
+    //($el é a variavel que traz a raiz do dom[o que esta dentro do templeate])
+  },
+  created () {
+    console.log("created");
+    console.log('acesso ao estado do componente', this.name);
+    console.log('acesso ao DOM ', this.$el); // o 
+    //($el é a variavel que traz a raiz do dom[o que esta dentro do template(lembrar de colocar tudo dentro de uma div)])
+  },
+  beforeMount(){
+    console.log("beforeMount");
+    console.log('acesso ao estado do componente', this.name);
+    console.log('acesso ao DOM ', this.$el); // o 
+    //($el é a variavel que traz a raiz do dom[o que esta dentro do template(lembrar de colocar tudo dentro de uma div)])
+  },
+  mounted(){
+    console.log("mounted");
+    console.log('acesso ao estado do componente', this.name);
+    console.log('acesso ao DOM ', this.$el); // o 
+    //($el é a variavel que traz a raiz do dom[o que esta dentro do template(lembrar de colocar tudo dentro de uma div)])
+  },
+  beforeUnmount(){
+    console.log("beforeUnmount");
+    console.log('acesso ao estado do componente', this.name);
+    console.log('acesso ao DOM ', this.$el); // o 
+    //($el é a variavel que traz a raiz do dom[o que esta dentro do template(lembrar de colocar tudo dentro de uma div)])
+  },
+  unmounted(){
+    console.log("unmounted");
+    console.log('acesso ao estado do componente', this.name);
+    console.log('acesso ao DOM ', this.$el); // o 
+    //($el é a variavel que traz a raiz do dom[o que esta dentro do template(lembrar de colocar tudo dentro de uma div)])
+  },
+  beforeUpdate(){
+    console.log("beforeUpdate - usar mais para debugar variaveis");
+  },
+  updated(){
+    console.log("updated - usar mais para debugar variaveis");
+  },
+
   watch: {
     usuario : { 
       handler(){
@@ -237,7 +291,6 @@ export default{
       this.modificou(newValue,oldValue);
     }
   },
-  name: 'App',
   computed: {
       fullName(){
           //return this.usuario.primeiroNome + ' ' + this.usuario.ultimoNome ou
@@ -252,7 +305,8 @@ export default{
       }
   },
   components:{   
-    TheHeader,
+    TheHeader, 
+    TestUnmountedVue,
   },
   methods: {
     changePage () { 
@@ -319,7 +373,7 @@ export default{
       usuario: {
         primeiroNome: 'Roberto',
         ultimoNome: 'Burgos',
-      }
+      },
     }
   }
 }
