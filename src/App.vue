@@ -223,6 +223,9 @@
   </ul>
 
   <TestUnmountedVue> </TestUnmountedVue>
+  <br><br>
+
+  <div class="title"><br>SLOT (trabalha mais com conteudo)</div>
   <SlotTeste>
      
     SLOT COMPONENT - Esse texto entra dentro da tag slot do component criado SlotTTeste
@@ -235,6 +238,12 @@
   <br><br>
 
   <BaseCard></BaseCard>
+  <br><br>
+  <div class="title"><br>PROPS envia do componente pai para o filho e EMIT Eenvia do filho para o pai<br> </div>
+  <div class="title"><br>PROPS e EMIT(componente alert)<br> (Props serve para trabalhar com comportamento do componente)</div>
+  <UIAlertVue v-if="showAlert" variant="success" text="formulario enviado" @fecharAleta="onFechar">
+
+  </UIAlertVue>
 
 </div>
 </template>
@@ -245,6 +254,7 @@ import TestUnmountedVue from './components/TestUnmounted.vue';
 import TheHeader from './components/TheHeader.vue';
 import SlotTeste from './components/SlotTeste.vue';
 import BaseCard from './components/BaseCard.vue'
+import UIAlertVue from './components/UIAlert.vue';
 export default{
   name: 'App',
   beforeCreate(){
@@ -321,8 +331,13 @@ export default{
     TestUnmountedVue,
     SlotTeste,
     BaseCard,
+    UIAlertVue,
   },
   methods: {
+    onFechar () { 
+      console.log("onFechar");
+      this.showAlert = false
+    },
     changePage () { 
       console.log("ajax change page")
     },
@@ -350,6 +365,7 @@ export default{
   },
   data () {
     return {
+      showAlert: true,
       paginacao: 5,
       esperando: '',
       cores: [],
@@ -428,7 +444,7 @@ export default{
  }
 
 .alert{
-  color: rgb(201, 104, 14);
+  color: rgb(252, 252, 252);
 }
 
 .text{
